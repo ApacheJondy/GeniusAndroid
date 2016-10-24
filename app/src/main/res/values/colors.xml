@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="defaultGreen">#15c715</color>
+    <color name="defaultRed">#e10707</color>
+    <color name="defaultYellow">#dbdb48</color>
+    <color name="defaultBlue">#0091ff</color>
+
+    <color name="selectedGreen">#03f907</color>
+    <color name="selectedRed">#ff0000</color>
+    <color name="selectedYellow">#ffff00</color>
+    <color name="selectedBlue">#00ecff</color>
+</resources>

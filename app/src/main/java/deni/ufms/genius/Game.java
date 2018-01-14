@@ -27,22 +27,20 @@ import java.util.Random;
  */
 public class Game extends Activity {
 
-    /* Pontuacao */
+    // Score
     private TextView txtScore;
-
-    /* Botoes do jogo */
-    private ImageView btnGreen, btnRed, btnYellow, btnBlue;
-
-    /* Variaveis com as sequencias da maquina e do jogador */
-    private ArrayList<Integer> comSequence, playerSequence;
-
-    /* Variavel para armazenar a pontuacao */
     private int score;
 
-    /* Verifica se esta no seu turno */
+    // Game buttons
+    private ImageView btnGreen, btnRed, btnYellow, btnBlue;
+
+    // Machine and player sequences
+    private ArrayList<Integer> comSequence, playerSequence;
+
+    // Check if its your turn
     private boolean yourTurn;
 
-    /* Movimento que esta sendo executado */
+    // Check current move
     private int play;
 
     @Override
@@ -50,7 +48,7 @@ public class Game extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
 
-        /* Inicializa as variaveis */
+        // Initialize vars
         txtScore = (TextView) findViewById(R.id.txtScore);
         score = 0;
         txtScore.setText(String.valueOf(score));
@@ -121,41 +119,22 @@ public class Game extends Activity {
 
     int i;
 
-    /* Executa a sequencia para o jogador repetir */
+    // Start machine sequence
     private void playSequence() {
 
-        /* Define que a maquina esta mostrando a sequencia */
+        // Set that machine is showing the sequence
         yourTurn = false;
 
-        /* Adiciona um movimento */
+        // Add a move
         addComputerMove();
-
         execButton(comSequence.get(comSequence.size()-1));
 
-        /* Percorre a lista para mostrar o sequencia */
-        /*
-        for (int i=0; i < comSequence.size(); i++){
-            execButton(comSequence.get(i));
-        }
-
-
-        for (int move : comSequence) {
-            play = move;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    execButton(play);
-                    System.out.println(comSequence.indexOf(play));
-                }
-            }, 1000);
-        }*/
-
-        /* Permite que o usuario execute sua sequencia */
+        // Allow user to play
         yourTurn = true;
 
     }
 
-    /* Executa a musica passada por parametro */
+    // Play a sound by its resource
     private void playSound(int resource) {
         MediaPlayer player = MediaPlayer.create(Game.this, resource);
         player.start();
@@ -167,7 +146,7 @@ public class Game extends Activity {
         });
     }
 
-    /* Executa o botao em questao */
+    // Press button by its id
     private void execButton(int button) {
         switch (button) {
             case R.id.btnGreen:
@@ -240,10 +219,10 @@ public class Game extends Activity {
         }
     }
 
-    /* Adiciona uma jogada ao computador */
+    // Add a new move to the sequence
     private void addComputerMove() {
 
-        /* Randomiza um numero entre 0 e 3 */
+        // Randomize the new move
         Random random = new Random();
         int randomNum = random.nextInt(4);
 
@@ -263,16 +242,17 @@ public class Game extends Activity {
         }
     }
 
-    /* Adiciona uma jogada ao jogador */
+    // Add a player move
     private void addPlayerMove(int button){
-        /* Adiciona movimento a sequencia de jogadas do jogador */
+
+        // Add pressed button to the sequence
         playerSequence.add(button);
 
-        /* Captura movimento similar do computador */
+        // Catch the index move in com sequence
         int position = playerSequence.size() - 1;
         int move = comSequence.get(position);
 
-        /* Caso o movimento não seja o mesmo, encerrar o jogo */
+        // If movement is different, game over!
         if (move != button){
             playSound(R.raw.error);
             Toast.makeText(Game.this, "ACABOU!! Score: "+score,Toast.LENGTH_SHORT).show();
@@ -280,7 +260,7 @@ public class Game extends Activity {
             return;
         }
 
-        /* Caso a sequencia foi encerrada e executada com sucesso, computador realiza outra seq. */
+        // If player's move was right, com start another sequence
         if (playerSequence.size() == comSequence.size()){
             new Handler().postDelayed(new Runnable() {
                 @Override
